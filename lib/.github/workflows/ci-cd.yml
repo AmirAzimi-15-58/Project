@@ -24,7 +24,7 @@ jobs:
         java-version: '17'
 
     - name: 📁 Make output directory
-      run: mkdir out -p out
+      run: mkdir -p out
 
     - name: 🧱 Compile Java code and tests
       run: |
