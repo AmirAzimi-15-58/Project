@@ -1,0 +1,39 @@
+# 📄 .github/workflows/ci-cd.yml
+# This workflow compiles Java code, runs tests, and simulates deployment
+
+name: Java CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: ⬇️ Checkout code
+      uses: actions/checkout@v4
+
+    - name: ☕ Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: 📁 Make output directory
+      run: mkdir out -p out
+
+    - name: 🧱 Compile Java code and tests
+      run: |
+        javac -d out -cp "lib/junit-platform-console-standalone-1.9.3.jar" MathUtils.java MathUtilsTest.java
+
+    - name: 🧪 Run JUnit tests
+      run: |
+        java -jar lib/junit-platform-console-standalone-1.9.3.jar --class-path out --scan-class-path
+
+    - name: 🚀 Simulate Deployment
+      if: success()
+      run: echo "✅ All tests passed. Simulating deployment..."
