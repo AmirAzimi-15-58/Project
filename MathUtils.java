@@ -1,14 +1,14 @@
 public class MathUtils {
 
     // Returns the factorial of a number (n!)
-    public long factorial(int n) {
-    if (n < 0) throw new IllegalArgumentException("Negative numbers not allowed");
-    long result = 0;  // <-- Mistake introduced here
-    for (int i = 2; i <= n; i++) {
-        result *= i;
+  public long factorial(int n) {
+        if (n < 0) throw new IllegalArgumentException("Negative numbers not allowed");
+        long result = 1;
+        for (int i = 2; i <= n; i++) {
+            result *= i;
+        }
+        return result;
     }
-    return result;
-}
 
     // Returns the nth Fibonacci number
     public int fibonacci(int n) {
